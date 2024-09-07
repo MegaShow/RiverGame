@@ -9,7 +9,6 @@ function gameOver() {
 }
 
 function start() {
-
   // game button
   var buttonStart = PIXI.Texture.fromImage('rc/gameStart.png');
   var buttonStartOn = PIXI.Texture.fromImage('rc/gameStartOn.png');
@@ -34,9 +33,13 @@ function start() {
   containerNow.addChild(gameBG);
   containerNow.addChild(gameStart);
 
-
   // Button function
   function onButtonDown() {
+    // 由于浏览器限制, 如果没有播放音乐, 这里尝试播放音乐
+    let audio = document.querySelector('#boxs > audio');
+    if (audio && audio.paused) {
+      audio.play();
+    }
     containerNow.removeChild(gameBG);
     containerNow.removeChild(gameStart);
     stageFirst();
